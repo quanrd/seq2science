@@ -256,6 +256,22 @@ elif config["quantifier"] == "kallistobus":
             {params.options} {input.reads} > {log} 2>&1
             """
 
+
+  """   rule sc_velo:
+        """
+        """
+        input:
+            bus_dirs=rules.kallistobus_count.output.dir
+        output:
+            "test.h5ad"
+        log:
+            notebook=expand("{result_dir}/{quantifier}/{{assembly}}-{{sample}}/velocity/{{assembly}}-{{sample}}.ipynb", **config)
+        conda:
+            "../envs/scvelo.yaml"
+        notebook:
+            "{notebook_dir}/RNA_velocity.ipynb"
+ """
+
             
 elif config["quantifier"] == "htseq":
 

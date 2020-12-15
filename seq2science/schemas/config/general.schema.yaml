@@ -30,6 +30,10 @@ properties:
     description: directory where to store the logs (defaults inside the result dir)
     default: benchmark
     type: string
+  notebook_dir: 
+    description: directory where interactive notebooks are located
+    default: ../../notebooks
+    type: string 
 
   # filename conventions
   fqext1:
