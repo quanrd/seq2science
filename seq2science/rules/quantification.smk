@@ -234,7 +234,7 @@ elif config["quantifier"] == "kallistobus":
              basedir=rules.kallistobus_ref.output,
              reads=rules.fastq_pair.output.reads
         output:
-            dir=directory(expand("{result_dir}/{quantifier}/{{assembly}}-{{sample}}", **config)),
+            dir=directory(expand("{result_dir}/{quantifier}/{{assembly}}-{{sample}}", **config))
         log:
             expand("{log_dir}/kallistobus_count/{{assembly}}-{{sample}}.log", **config),
         benchmark:
@@ -261,13 +261,15 @@ elif config["quantifier"] == "kallistobus":
         """
         """
         input:
-            busroot= f"{config['result_dir']}/{config['quantifier']}"
+            dirs=expand("{result_dir}/{quantifier}/{{assembly}}-{{sample}}", **config)
         output:
+            processed=expand("{result_dir}/scvelo/{{assembly}}-{{sample}}_processed.h5ad", **config)
         log:
-            f"{config['result_dir']}/scvelo/processed_notebook.py.ipynb"
+            expand("{result_dir}/scvelo/{{assembly}}-{{sample}}_processed.py.ipynb", **config)
         conda:
             "../envs/scvelo.yaml"
         params:
+            busroot=f"{config['result_dir']}/kallistobus",
             result_dir=f"{config['result_dir']}/scvelo"
         notebook:
              f"{config['rule_dir']}/../notebooks/test_notebook.py.ipynb"
