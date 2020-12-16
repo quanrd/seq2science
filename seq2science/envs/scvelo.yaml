@@ -1,0 +1,10 @@
+name: scvelo
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - anaconda
+dependencies:
+  - python>=3.7
+  - bioconda::scvelo=0.2.2
+  - anaconda::jupyter=1.0.0

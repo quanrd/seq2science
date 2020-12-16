@@ -257,20 +257,21 @@ elif config["quantifier"] == "kallistobus":
             """
 
 
-  """   rule sc_velo:
+    rule sc_velo:
         """
         """
         input:
-            bus_dirs=rules.kallistobus_count.output.dir
+            busroot= f"{config['result_dir']}/{config['quantifier']}"
         output:
-            "test.h5ad"
         log:
-            notebook=expand("{result_dir}/{quantifier}/{{assembly}}-{{sample}}/velocity/{{assembly}}-{{sample}}.ipynb", **config)
+            f"{config['result_dir']}/scvelo/processed_notebook.py.ipynb"
         conda:
             "../envs/scvelo.yaml"
+        params:
+            result_dir=f"{config['result_dir']}/scvelo"
         notebook:
-            "{notebook_dir}/RNA_velocity.ipynb"
- """
+             f"{config['rule_dir']}/../notebooks/test_notebook.py.ipynb"
+             
 
             
 elif config["quantifier"] == "htseq":
