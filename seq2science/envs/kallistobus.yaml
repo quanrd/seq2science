@@ -5,4 +5,5 @@ channels:
   - defaults
 dependencies:
   - python>=3.7
-  - bioconda::kb-python=0.25.0
+  - pip:
+    - "--editable=git+https://github.com/pachterlab/kb_python@devel --upgrade"
