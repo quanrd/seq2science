@@ -5,5 +5,6 @@ channels:
   - defaults
 dependencies:
   - python>=3.7
-  - pip:
-    - "--editable=git+https://github.com/pachterlab/kb_python@devel --upgrade"
+  - pip
+  - pip: 
+    - "--install=git+https://github.com/pachterlab/kb_python.git@781b1605aa2c47a03c058c1162e4007189e19055"
