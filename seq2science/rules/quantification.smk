@@ -263,7 +263,7 @@ elif config["quantifier"] == "kallistobus":
         input:
             dirs=expand("{result_dir}/{quantifier}/{{assembly}}-{{sample}}", **config)
         output:
-            processed=expand("{result_dir}/scvelo/{{assembly}}-{{sample}}_processed.h5ad", **config)
+            processed=expand("{result_dir}/scvelo/{{assembly}}-{{sample}}_processed.loom", **config)
         log:
             expand("{result_dir}/scvelo/{{assembly}}-{{sample}}_processed.py.ipynb", **config)
         conda:
