@@ -4,8 +4,39 @@ description: seq2science single-cell atac-seq configuration
 
 properties:
   snaptools_opt:
-    description: TODO @JGASmits add description
+    description: snaptools optional arguments for snaptools snap-pre, from snaptools (https://github.com/r3fang/SnapTools): 
+      --barcode-file BARCODE_FILE
+                          a txt file contains pre-selected cell barcodes. If --barcode-file is given, snaptools will ignore any barcodes not present in the --barcode-file. If it is None, snaptools will automatically identify barcodes from bam file. The first column of --barcode-file
+                          must be the selected barcodes and the other columns could be any attributes of the barcode as desired (`ATGCTCTACTAC attr1 att2`). The attributes, however, will not be kept in the snap file. This tag will be ignored if the output snap file already exists.
+                          (default: None)
+      --min-mapq MIN_MAPQ   min mappability score. Fargments with mappability score less than --min-mapq will be filtered. (default: 10)
+      --min-flen MIN_FLEN   min fragment length. Fragments of length shorted than --min-flen will be filtered. (default: 0)
+      --max-flen MAX_FLEN   max fragment length. Fragments of length longer than --max-flen will be filtered. (default: 1000)
+      --min-cov MIN_COV     min number of fragments per barcode. barcodes of total fragments fewer than --min-cov will be considered when creating the cell x bin count matrix. Note: because the vast majority of barcodes contains very few reads, we found by setting --min-cov, one can
+                            remove barcodes of low coverage without wasting time and storage. Please note that this is not selection of good barcodes for downstream clustering analysis, it is only filterationof very low-quality barcodes. (default: 0)
+      --max-num MAX_NUM     max number of barcodes to store. Barcodes are sorted based on the coverage and only the top --max-num barcodes will be stored. (default: 1000000)
+      --keep-chrm KEEP_CHRM
+                            a boolen tag indicates whether to keep fragments mapped to chrM. If set Fasle, fragments aligned to the mitochondrial sequence will be filtered. (default: True)
+      --keep-single KEEP_SINGLE
+                            a boolen tag indicates whether to keep those reads whose mates are not mapped or missing. If False, unpaired reads will be filtered. If True, unpaired reads will be simply treated as a fragment. Note: for single-end such as scTHS-seq, --keep-single must be
+                            True. (default: True)
+      --keep-secondary KEEP_SECONDARY
+                            a boolen tag indicates whether to keep secondary alignments. If False, secondary alignments will be filtered. If True, a secondary alignments will be treated as fragments just single-end. (default: False)
+      --keep-discordant KEEP_DISCORDANT
+                            a boolen tag indicates whether to keep discordant read pairs. (default: False)
+      --tmp-folder TMP_FOLDER
+                            a directory to store temporary files. If not given, snaptools will automatically generate a temporary location to store temporary files. (default: None)
+      --overwrite OVERWRITE
+                            a boolen tag indicates whether to overwrite the matrix session if it already exists. (default: False)
+      --qc-file QC_FILE     a boolen tag indicates whether to create a master qc file. This .qc file contains basic quality control metrics at the bulk level. Quality control is only estimated by selected barcodes only. (default: True)
+      --verbose VERBOSE     a boolen tag indicates output the progress. (default: True)
     default: --min-flen=0 --max-flen=1000 --keep-single=FALSE --keep-secondary=FALSE --overwrite=True --min-cov=100 --verbose=True
   bin_opt:
-    description: TODO @JGASmits add description
+    description: snaptools optional arguments for snaptools snap-add-bmat, from snaptools (https://github.com/r3fang/SnapTools): 
+      --bin-size-list BIN_SIZE_LIST [BIN_SIZE_LIST ...]
+                        a list of bin size(s) to create the cell-by-bin count matrix. The genome will be divided into bins of the equal size of --bin-size-list to create the cell x bin count matrix. If more than one bin size are given, snaptools will generate a list of cell x bin
+                        matrices of different resolutions and stored in the same snap file. (default: [5000])
+      --tmp-folder TMP_FOLDER
+                            a directory to store temporary files. If not given, snaptools will automatically generate a temporary location to store temporary files. (default: None)
+      --verbose VERBOSE     a boolen tag indicates output the progress. (default: True)
     default: --bin-size-list 5000 --verbose=True
